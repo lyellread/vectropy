@@ -7,6 +7,9 @@ inputs = ["1","2","3","4","5","6","7","8","9"] #I know its lazy; Who cares?
 ijk=[]
 xyz=[]
 types =  [["X","i"],["Y","j"],["Z","k"]]
+ijk_Names = []
+xyz_Names = []
+
 import prettytable
 
 print (" + Version: "+version+"; Author: Lyell Read")
@@ -53,7 +56,10 @@ def menu ():
     #functionlist = [None, enter, remove, inverse, display, graphical, iandj, add, vers, exit]
     functionlist[int(answer)]()
 
-def display():
+### ADD PARAMETER PARSING WITH THE FUNCTION CALL FOR MENU RETURN.
+
+
+def display(return_Toggle):
     print("\n + I/J/K Vectors :\n")
     table = prettytable.PrettyTable(["Name","I Comp.","J Comp.","K Comp.","Comments"])
     for ijk_Vector in ijk:
@@ -64,6 +70,10 @@ def display():
     for xyz_Vector in xyz:
         table.add_row(xyz_Vector)
     print (table)
+    if return_Toggle == 1:
+        menu()
+    else:
+        return
 
 def enter ():
     quantity=input ("\n + How many vectors?, 0 to exit:")
@@ -101,8 +111,15 @@ def remove():
         menu()
     else:
         for removal in range (0,vector_Quantity):
-            display()
-
+            display(0)
+            remove_Name = input("\n + What is the exact name of the vector you want to delete? :")
+            for item1 in ijk:
+                ijk_Names.append(item1[0])
+            for item2 in xyz:
+                xyz_Names.append(item2[0])
+            print(xyz_Names, ijk_Names)
+            while not remove_Name in xyz_Names or not remove_Name in ijk_Names:
+                remove_Name = input(" + Not found; Please reenter :")
 
 
 
