@@ -52,9 +52,9 @@ def menu ():
     answer = input ("\n + Choose An Operation     :")
     while not answer in inputs:
         answer = input ("\n + Choose An Operation Again; \n   + The last operation resulted in failure, as the input was not in the acceptable range.\n\n+Choose An Operation    :")
-    functionlist = [None, enter, remove, None, None, display]
-    #functionlist = [None, enter, remove, inverse, display, graphical, iandj, add, vers, exit]
-    functionlist[int(answer)]()
+    functionlist = [None, [enter, None], [remove, None], [None, None], [None, None], [display,1]]
+    #functionlist = [None, enter, remove, inverse, display, graphical, iandj, add, vers, e]xit]
+    functionlist [int(answer)] [0](functionlist[int(answer)][1])
 
 ### ADD PARAMETER PARSING WITH THE FUNCTION CALL FOR MENU RETURN.
 
@@ -70,12 +70,14 @@ def display(return_Toggle):
     for xyz_Vector in xyz:
         table.add_row(xyz_Vector)
     print (table)
+    
     if return_Toggle == 1:
+        quit_Toggle = input("\n + Enter anythng to continue:")
         menu()
     else:
         return
 
-def enter ():
+def enter (_empty):
     quantity=input ("\n + How many vectors?, 0 to exit:")
     while not type(int(quantity)) == int:
         quantity = input ("\n+ Choose An Operation Again; \n   + The last operation resulted in failure, as the input was not an integer.\n\n+ Choose An Operation    :")
@@ -100,7 +102,7 @@ def enter ():
 
     menu()
 
-def remove():
+def remove(_empty):
     print(" + What type of vectors are you removing?\n")
     vector_Type = vectype()
     vector_Quantity=input ("\n + How many vectors?, 0 to exit:")
@@ -113,13 +115,28 @@ def remove():
         for removal in range (0,vector_Quantity):
             display(0)
             remove_Name = input("\n + What is the exact name of the vector you want to delete? :")
+            ijk_Names = []
+            xyz_Names = []
+
             for item1 in ijk:
                 ijk_Names.append(item1[0])
             for item2 in xyz:
                 xyz_Names.append(item2[0])
+                
             print(xyz_Names, ijk_Names)
-            while not remove_Name in xyz_Names or not remove_Name in ijk_Names:
-                remove_Name = input(" + Not found; Please reenter :")
+            while not remove_Name in xyz_Names + ijk_Names:
+                remove_Name = input(" + Please re-enter :")
+
+            ### FIX LOOP ###
+
+            if remove_Name in ijk_Names:
+                ijk_Names.remove(remove_Name)
+            elif remove_Name in xyz_Names:
+                xyz_Names.remove(remove_Name
+    menu()
+
+                
+                
 
 
 
