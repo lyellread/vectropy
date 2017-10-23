@@ -59,6 +59,11 @@ def display():
     for ijk_Vector in ijk:
         table.add_row(ijk_Vector)
     print (table)
+    print("\n + X/Y/Z Vectors :\n")
+    table = prettytable.PrettyTable(["Name","X Comp.","Y Comp.","Z Comp.","Comments"])
+    for xyz_Vector in xyz:
+        table.add_row(xyz_Vector)
+    print (table)
 
 def enter ():
     quantity=input ("\n + How many vectors?, 0 to exit:")
@@ -78,7 +83,7 @@ def enter ():
                 component=input(" + Input the " + types[comp][vector_Type] + " of vector number " + str(vec+1) + " :")
                 temp.append(float(component))
             temp.append (comments)
-            if vectype == 0:
+            if vector_Type == 0:
                 xyz.append(temp)
             else:
                 ijk.append(temp)
