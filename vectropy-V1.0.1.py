@@ -55,7 +55,7 @@ def menu ():
 
 def display():
     print("\n + I/J/K Vectors :\n")
-    table = prettytable.PrettyTable(["#","Name","I Comp.","J Comp.","K Comp.","Comments"])
+    table = prettytable.PrettyTable(["Name","I Comp.","J Comp.","K Comp.","Comments"])
     for ijk_Vector in ijk:
         table.add_row(ijk_Vector)
     print (table)
@@ -76,7 +76,7 @@ def enter ():
             comments = input (" + Enter any comments about this vector: ")
             for comp in range (0,3):
                 component=input(" + Input the " + types[comp][vector_Type] + " of vector number " + str(vec+1) + " :")
-                temp.append(int(component))
+                temp.append(float(component))
             temp.append (comments)
             if vectype == 0:
                 xyz.append(temp)
