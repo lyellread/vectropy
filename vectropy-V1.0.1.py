@@ -127,12 +127,10 @@ def remove(_empty):
             while not remove_Name in xyz_Names + ijk_Names:
                 remove_Name = input(" + Please re-enter :")
 
-            ### FIX LOOP ###
-
             if remove_Name in ijk_Names:
-                ijk_Names.remove(remove_Name)
+                ijk.remove(ijk[ijk_Names.index(remove_Name)])
             elif remove_Name in xyz_Names:
-                xyz_Names.remove(remove_Name
+                xyz.remove(xyz[xyz_Names.index(remove_Name)])
     menu()
 
                 
