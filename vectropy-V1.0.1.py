@@ -2,10 +2,10 @@
 
 ##A Program by Lyell Read
 
-version = "1.0.1"
+version = "1.1.1"
 inputs = ["1","2","3","4","5","6","7","8","9"] #I know its lazy; Who cares?
 Vectors=[]
-types =  [["X","i"],["Y","j"],["Z","k"]]
+types =  [["X -or- i"],["Y -or- j"],["Z -or- k"]]
 names = []
 
 import prettytable
@@ -42,7 +42,7 @@ def menu ():
             "   + [3] : Take the Inverse of a Vector\n"+
             "   + [4] : Print Vector(s) in Storage\n"+
             "   + [5] : Display Vector(s) Graphically (uses Turtle)\n"+
-            "   + [6] : Additional Functionality [math]\n"+
+            "   + [6] : Additional [math] Functionality\n"+
             "   + [7] : Add or Subtract Vector(s)\n"+
             "   + [8] : Display Version and Copyright Infirmation\n"+
             "   + [9] : EXIT this program (clears data)")
@@ -65,7 +65,7 @@ def display(return_Toggle):
     print (table)
 
     if return_Toggle == 1:
-        quit_Toggle = input("\n + Enter anythng to continue:")
+        quit_Toggle = input("\n + Enter anything to continue:")
         menu()
     else:
         return
@@ -79,25 +79,19 @@ def enter (_empty):
         menu()
     else:
         print(" + What type of vector are you adding?\n")
-        vector_Type = vectype()
         for vec in range (0,int(quantity)):
             temp=[]
             temp.append(input(" + Please choose a name for this vector: "))
             comments = input (" + Enter any comments about this vector: ")
             for comp in range (0,3):
-                component=input(" + Input the " + types[comp][vector_Type] + " of vector number " + str(vec+1) + " :")
+                component=input(" + Input the " + types[comp] + " of vector number " + str(vec+1) + " :")
                 temp.append(float(component))
             temp.append (comments)
-            if vector_Type == 0:
-                xyz.append(temp)
-            else:
-                ijk.append(temp)
+            Vectors.append(temp)
 
     menu()
 
 def remove(_empty):
-    print(" + What type of vectors are you removing?\n")
-    vector_Type = vectype()
     vector_Quantity=input ("\n + How many vectors?, 0 to exit:")
     while not type(int(vector_Quantity)) == int:
         vector_Quantity = input ("\n+ Choose An Operation Again; \n   + The last operation resulted in failure, as the input was not an integer.\n\n+ Choose An Operation    :")
@@ -108,21 +102,17 @@ def remove(_empty):
         for removal in range (0,vector_Quantity):
             display(0)
             remove_Name = input("\n + What is the exact name of the vector you want to delete? :")
-            ijk_Names = []
-            xyz_Names = []
+            Vector_names = []
 
-            for item1 in ijk:
-                ijk_Names.append(item1[0])
-            for item2 in xyz:
-                xyz_Names.append(item2[0])
+            for item1 in Vectors:
+                Vector_names.append(item1[0])
 
-            while not remove_Name in xyz_Names + ijk_Names:
+            while not remove_Name in Vector_names:
                 remove_Name = input(" + Please re-enter :")
 
-            if remove_Name in ijk_Names:
-                ijk.remove(ijk[ijk_Names.index(remove_Name)])
-            elif remove_Name in xyz_Names:
-                xyz.remove(xyz[xyz_Names.index(remove_Name)])
+            if remove_Name in Vector_names:
+                Vectors.remove(ijk[ijk_Names.index(remove_Name)])
+
     menu()
 
 
