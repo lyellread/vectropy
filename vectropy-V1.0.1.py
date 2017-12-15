@@ -5,7 +5,7 @@
 version = "1.1.2"
 inputs = ["1","2","3","4","5","6","7","8","9"] #I know its lazy; Who cares?
 Vectors=[]
-types =  [["X -or- i"],["Y -or- j"],["Z -or- k"]]
+types =  ["X -or- i","Y -or- j","Z -or- k"]
 names = []
 
 import prettytable
@@ -82,7 +82,7 @@ def enter (_empty): #the parsed value is nont anyway so therefore _empty = None
             temp.append(input(" + Please choose a name for this vector: ")) #add name in [vec][0]
             comments = input (" + Enter any comments about this vector: ") #comments have to wait until the end of the vector list [4]
             for comp in range (0,3): #enumerate the X, Y,  X components enyry
-                component=input(" + Input the " + types[comp] + " of vector number " + str(vec+1) + " :") #Instructions for the user.
+                component=input(" + Input the " + str(types[comp]) + " of vector number " + str(vec+1) + " :") #Instructions for the user.
                 temp.append(float(component))  #Append X,Y,Z in order in indexes [1],[2],[3] respectively
             temp.append (comments) #Now add the comments in index [4]
             Vectors.append(temp) #Bring this simgle vector into the larger Vectors list
