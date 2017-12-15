@@ -41,77 +41,76 @@ def menu ():
             "   + [2] : Delete Vector(s) From Storage\n"+
             "   + [3] : Take the Inverse of a Vector\n"+
             "   + [4] : Print Vector(s) in Storage\n"+
-            "   + [5] : Display Vector(s) Graphically (uses Turtle)\n"+
-            "   + [6] : Additional [math] Functionality\n"+
+            "   + [5] : Display Vector(s) Graphically (uses Turtle if available)\n"+ ## Might change this if cli print is too hard with thetas and len's
+            "   + [6] : Additional Math Functionality\n"+
             "   + [7] : Add or Subtract Vector(s)\n"+
             "   + [8] : Display Version and Copyright Infirmation\n"+
             "   + [9] : EXIT this program (clears data)")
 
     answer = input ("\n + Choose An Operation     :")
-    while not answer in inputs:
+    while not answer in inputs: #verify that a valid command has been entered
         answer = input ("\n + Choose An Operation Again; \n   + The last operation resulted in failure, as the input was not in the acceptable range.\n\n+Choose An Operation    :")
-    functionlist = [None, [enter, None], [remove, None], [None, None], [None, None], [display,1]]
-    #functionlist = [None, enter, remove, inverse, display, graphical, iandj, add, vers, exit]
-    functionlist [int(answer)] [0](functionlist[int(answer)][1])
+    functionlist = [None, [enter, None], [remove, None], [None, None], [None, None], [display,1]] #Define a list of available functions in the format [[function_name, parse_value],...]
+    #functionlist = [None, enter, remove, inverse, display, graphical, iandj, add, vers, exit] ##Complete *command* list here, no values to pass them.
+    functionlist [int(answer)] [0](functionlist[int(answer)][1]) #calls the functon at [answer][0] index of the nested function list... then parse it the [answer][1] value, which is often None
 
 ### ADD PARAMETER PARSING WITH THE FUNCTION CALL FOR MENU RETURN.
 
 
 def display(return_Toggle):
     print("\n + All Vectors :\n")
-    table = prettytable.PrettyTable(["Name","X -or- I Comp.","Y -or- J Comp.","Z -or- K Comp.","Comments"])
-    for _Vector in Vectors:
+    table = prettytable.PrettyTable(["Name","X -or- I Comp.","Y -or- J Comp.","Z -or- K Comp.","Comments"]) #PrettyTable module used for nice tables
+    for _Vector in Vectors: #adds a row for every vector in the Vector list
         table.add_row(_Vector)
-    print (table)
+    print (table)#Print the table now that it is made
 
-    if return_Toggle == 1:
+    if return_Toggle == 1: #sometimes, display() is called by other fxn's with the return_Toggle = 0 so that it prints and returns qithout requiring action
         quit_Toggle = input("\n + Enter anything to continue:")
         menu()
     else:
         return
 
-def enter (_empty):
-    quantity=input ("\n + How many vectors?, 0 to exit:")
-    while not type(int(quantity)) == int:
+def enter (_empty): #the parsed value is nont anyway so therefore _empty = None
+    quantity=input ("\n + How many vectors?, 0 to exit:") #define quantity of vectors to add to the list
+    while not type(int(quantity)) == int: ##Must be fixed: This is by defenition either a TRUE or an ERROR
         quantity = input ("\n+ Choose An Operation Again; \n   + The last operation resulted in failure, as the input was not an integer.\n\n+ Choose An Operation    :")
-    output=[]
     if int(quantity) == 0:
-        menu()
+        menu() # if the number of vectors is zero, the user does not want to enter more, so we quit to menu
     else:
-        print(" + What type of vector are you adding?\n")
-        for vec in range (0,int(quantity)):
-            temp=[]
-            temp.append(input(" + Please choose a name for this vector: "))
-            comments = input (" + Enter any comments about this vector: ")
-            for comp in range (0,3):
-                component=input(" + Input the " + types[comp] + " of vector number " + str(vec+1) + " :")
-                temp.append(float(component))
-            temp.append (comments)
-            Vectors.append(temp)
+        for vec in range (0,int(quantity)): #repeat vector quantity times
+            temp=[] #What could be bad with another empty list ;)
+            temp.append(input(" + Please choose a name for this vector: ")) #add name in [vec][0]
+            comments = input (" + Enter any comments about this vector: ") #comments have to wait until the end of the vector list [4]
+            for comp in range (0,3): #enumerate the X, Y,  X components enyry
+                component=input(" + Input the " + types[comp] + " of vector number " + str(vec+1) + " :") #Instructions for the user.
+                temp.append(float(component))  #Append X,Y,Z in order in indexes [1],[2],[3] respectively
+            temp.append (comments) #Now add the comments in index [4]
+            Vectors.append(temp) #Bring this simgle vector into the larger Vectors list
 
-    menu()
+    menu()#return to menu
 
 def remove(_empty):
-    vector_Quantity=input ("\n + How many vectors?, 0 to exit:")
-    while not type(int(vector_Quantity)) == int:
+    vector_Quantity=input ("\n + How many vectors to remove?, 0 to exit:")#Usual start here
+    while not type(int(vector_Quantity)) == int: ## Again needs repairing as this will return ERROR or TRUE
         vector_Quantity = input ("\n+ Choose An Operation Again; \n   + The last operation resulted in failure, as the input was not an integer.\n\n+ Choose An Operation    :")
     vector_Quantity = int(vector_Quantity)
-    if vector_Quantity == 0:
+    if vector_Quantity == 0: #return to menu if entered input is zero
         menu()
     else:
-        for removal in range (0,vector_Quantity):
-            display(0)
+        for removal in range (0,vector_Quantity): #loop number of vectors to remove
+            display(0) # show vectors in storage, calling display() function with the 0 flag to keep it returning to this function without a break
             remove_Name = input("\n + What is the exact name of the vector you want to delete? :")
-            Vector_names = []
+            Vector_names = [] #define temporary list for names of all vectors
 
             for item1 in Vectors:
-                Vector_names.append(item1[0])
+                Vector_names.append(item1[0]) #populate the temp list with the names of every vector in storage
 
-            while not remove_Name in Vector_names:
+            ## ADD HERE SOMETHING THAT CHECKS FOR MULTIPLE VEC'S WITH THE SAME NAME
+
+            while not remove_Name in Vector_names: #check for presence of the name in the list
                 remove_Name = input(" + Please re-enter :")
-
             if remove_Name in Vector_names:
-                Vectors.remove(ijk[ijk_Names.index(remove_Name)])
+                Vectors.remove(Vectors[remove_Name.index(remove_Name)]) #remove the specific vector from the main list
 
     menu()
 
