@@ -2,7 +2,7 @@
 
 ##A Program by Lyell Read
 
-version = "1.1.1"
+version = "1.1.2"
 inputs = ["1","2","3","4","5","6","7","8","9"] #I know its lazy; Who cares?
 Vectors=[]
 types =  [["X -or- i"],["Y -or- j"],["Z -or- k"]]
