@@ -50,7 +50,7 @@ def menu ():
     answer = input ("\n + Choose An Operation     :")
     while not answer in inputs: #verify that a valid command has been entered
         answer = input ("\n + Choose An Operation Again; \n   + The last operation resulted in failure, as the input was not in the acceptable range.\n\n+Choose An Operation    :")
-    functionlist = [None, [enter, None], [remove, None], [None, None], [None, None], [display,1]] #Define a list of available functions in the format [[function_name, parse_value],...]
+    functionlist = [None, [enter, None], [remove, None], [None, None], [display, 1], [display,1]] #Define a list of available functions in the format [[function_name, parse_value],...]
     #functionlist = [None, enter, remove, inverse, display, graphical, iandj, add, vers, exit] ##Complete *command* list here, no values to pass them.
     functionlist [int(answer)] [0](functionlist[int(answer)][1]) #calls the functon at [answer][0] index of the nested function list... then parse it the [answer][1] value, which is often None
 
@@ -65,7 +65,7 @@ def display(return_Toggle):
     print (table)#Print the table now that it is made
 
     if return_Toggle == 1: #sometimes, display() is called by other fxn's with the return_Toggle = 0 so that it prints and returns qithout requiring action
-        quit_Toggle = input("\n + Enter anything to continue:")
+        quit_Toggle = input("\n + Enter to continue:")
         menu()
     else:
         return
@@ -80,6 +80,9 @@ def enter (_empty): #the parsed value is nont anyway so therefore _empty = None
         for vec in range (0,int(quantity)): #repeat vector quantity times
             temp=[] #What could be bad with another empty list ;)
             temp.append(input(" + Please choose a name for this vector: ")) #add name in [vec][0]
+
+            #check name not already in db
+
             comments = input (" + Enter any comments about this vector: ") #comments have to wait until the end of the vector list [4]
             for comp in range (0,3): #enumerate the X, Y,  X components enyry
                 component=input(" + Input the " + str(types[comp]) + " of vector number " + str(vec+1) + " :") #Instructions for the user.
@@ -102,15 +105,12 @@ def remove(_empty):
             remove_Name = input("\n + What is the exact name of the vector you want to delete? :")
             Vector_names = [] #define temporary list for names of all vectors
 
-            for item1 in Vectors:
-                Vector_names.append(item1[0]) #populate the temp list with the names of every vector in storage
-
-            ## ADD HERE SOMETHING THAT CHECKS FOR MULTIPLE VEC'S WITH THE SAME NAME
+            Vector_names = [item1[0] for item1 in Vectors] #List Comprehension!!
 
             while not remove_Name in Vector_names: #check for presence of the name in the list
                 remove_Name = input(" + Please re-enter :")
-            if remove_Name in Vector_names:
-                Vectors.remove(Vectors[remove_Name.index(remove_Name)]) #remove the specific vector from the main list
+
+            Vectors.remove(Vectors[remove_Name.index(remove_Name)]) #remove the specific vector from the main list
 
     menu()
 
