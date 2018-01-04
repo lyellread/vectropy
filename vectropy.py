@@ -2,7 +2,7 @@
 
 ##A Program by Lyell Read
 
-version = "1.1.2"
+version = "1.1.3"
 inputs = ["1","2","3","4","5","6","7","8","9"] #I know its lazy; Who cares?
 Vectors=[]
 types =  ["X -or- i","Y -or- j","Z -or- k"]
@@ -11,7 +11,7 @@ names = []
 import prettytable
 
 print (" + Version: "+version+"; Author: Lyell Read")
-print ("\n + Start this program with Python Turtle?\n    - Note: This will not allow for graphical vector display if off")
+print ("\n + Start this program with Python Turtle?\n    - Note: This will not allow for graphical vector display if off")##or will it??
 
 ##Verify here input Y/N
 turtle_Toggle = input("\n + Turn turtle on? (Y/N):")
@@ -24,13 +24,6 @@ def title ():
     print (str("\n")*70+"+----------------------------------------------+\n|vectropy- a Python Vector Program, Vers. "+
             version+"|\n|       Date: "+ time.strftime("%m/%d/%Y")+ "  Time: "+ time.strftime("%H:%M:%S")+
             ".       |\n+----------------------------------------------+")
-
-#def vectype():
-#    vectype = input ("\n + Enter 0 to input an X/Y/Z vector, 1 to enter an i/j/k vector:")
-#    while not vectype in ["0","1"]:
-#        vectype = input ("\n+ Choose An Operation Again; \n   + The last operation resulted in failure, as the input was not an integer.\n\n+ Choose An Operation    :")
-#    vectype=int(vectype)
-#    return vectype
 
 def menu ():
 
@@ -50,8 +43,20 @@ def menu ():
     answer = input ("\n + Choose An Operation     :")
     while not answer in inputs: #verify that a valid command has been entered
         answer = input ("\n + Choose An Operation Again; \n   + The last operation resulted in failure, as the input was not in the acceptable range.\n\n+Choose An Operation    :")
-    functionlist = [None, [enter, None], [remove, None], [None, None], [display, 1], [display,1]] #Define a list of available functions in the format [[function_name, parse_value],...]
-    #functionlist = [None, enter, remove, inverse, display, graphical, iandj, add, vers, exit] ##Complete *command* list here, no values to pass them.
+
+    #Define a list of available functions in the format [[function_name, parse_value],...] with null starter for the laziness coefficient
+    functionlist = [None, 
+                    [enter, None],
+                    [remove, None],
+                    [None, None],
+                    [display, 1], 
+                    [display,1],
+                    [None, None],
+                    [None, None],
+                    [None, None],
+                    [None, None]
+                    ]
+
     functionlist [int(answer)] [0](functionlist[int(answer)][1]) #calls the functon at [answer][0] index of the nested function list... then parse it the [answer][1] value, which is often None
 
 ### ADD PARAMETER PARSING WITH THE FUNCTION CALL FOR MENU RETURN.
@@ -64,7 +69,7 @@ def display(return_Toggle):
         table.add_row(_Vector)
     print (table)#Print the table now that it is made
 
-    if return_Toggle == 1: #sometimes, display() is called by other fxn's with the return_Toggle = 0 so that it prints and returns qithout requiring action
+    if return_Toggle == 1: #sometimes, display() is called by other fxn's with the return_Toggle = 0 so that it prints and returns without requiring action for inline printout
         quit_Toggle = input("\n + Enter to continue:")
         menu()
     else:
@@ -84,7 +89,7 @@ def enter (_empty): #the parsed value is nont anyway so therefore _empty = None
             #check name not already in db
 
             comments = input (" + Enter any comments about this vector: ") #comments have to wait until the end of the vector list [4]
-            for comp in range (0,3): #enumerate the X, Y,  X components enyry
+            for comp in range (0,3): #enumerate the X, Y, Z component entry
                 component=input(" + Input the " + str(types[comp]) + " of vector number " + str(vec+1) + " :") #Instructions for the user.
                 temp.append(float(component))  #Append X,Y,Z in order in indexes [1],[2],[3] respectively
             temp.append (comments) #Now add the comments in index [4]
