@@ -2,7 +2,7 @@
 
 ##A Program by Lyell Read
 
-version = "1.1.3"
+version = "1.1.4"
 inputs = ["1","2","3","4","5","6","7","8","9"] #I know its lazy; Who cares?
 Vectors=[]
 types =  ["X -or- i","Y -or- j","Z -or- k"]
@@ -45,12 +45,12 @@ def menu ():
         answer = input ("\n + Choose An Operation Again; \n   + The last operation resulted in failure, as the input was not in the acceptable range.\n\n+Choose An Operation    :")
 
     #Define a list of available functions in the format [[function_name, parse_value],...] with null starter for the laziness coefficient
-    functionlist = [None, 
+    functionlist = [None,
                     [enter, None],
                     [remove, None],
                     [None, None],
-                    [display, 1], 
-                    [display,1],
+                    [display, 1],
+                    [None, None],
                     [None, None],
                     [None, None],
                     [None, None],
@@ -84,10 +84,10 @@ def enter (_empty): #the parsed value is nont anyway so therefore _empty = None
     else:
         for vec in range (0,int(quantity)): #repeat vector quantity times
             temp=[] #What could be bad with another empty list ;)
-            temp.append(input(" + Please choose a name for this vector: ")) #add name in [vec][0]
-
-            #check name not already in db
-
+            temp_Name = input(" + Please choose a name for this vector: ") #add name in [vec][0]
+            while [True for x in Vectors if x[0]==temp_Name]==[True] :#Hey sometimes you gotta use a list comprehension where its probably not meant to be
+                temp_Name = input(" + Please re-enter the name of the vector or enter 'replace' to override the vector in storage")
+            temp.append(temp_Name)
             comments = input (" + Enter any comments about this vector: ") #comments have to wait until the end of the vector list [4]
             for comp in range (0,3): #enumerate the X, Y, Z component entry
                 component=input(" + Input the " + str(types[comp]) + " of vector number " + str(vec+1) + " :") #Instructions for the user.
